@@ -34,7 +34,7 @@ public class App {
             bookInfoDAO.save(bookInfoDTO);
         }
 
-
+        //test
 
         List<BookInfoDTO> bookInfoDTOList;
         //Parse
