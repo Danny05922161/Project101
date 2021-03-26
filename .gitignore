@@ -21,3 +21,25 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+Project101.iml
+.idea/$CACHE_FILE$
+.idea/checkstyle-idea.xml
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml
+.idea/libraries/Maven__com_microsoft_sqlserver_mssql_jdbc_9_2_1_jre15.xml
+.idea/libraries/Maven__com_opencsv_opencsv_5_4.xml
+.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_4.xml
+.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml
+.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml
+.idea/libraries/Maven__junit_junit_4_11.xml
+.idea/libraries/Maven__mysql_mysql_connector_java_8_0_23.xml
+.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml
+.idea/libraries/Maven__org_apache_commons_commons_lang3_3_11.xml
+.idea/libraries/Maven__org_apache_commons_commons_text_1_9.xml
+.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
