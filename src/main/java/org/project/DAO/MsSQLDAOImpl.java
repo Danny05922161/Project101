@@ -1,10 +1,12 @@
 package org.project.DAO;
 
 import org.project.ConnectionUtil;
+import org.project.DAO.RowMapper.RowMapper;
 import org.project.DTO.BookInfoDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +42,9 @@ public class MsSQLDAOImpl implements DAO {
         sqlBuilder.deleteCharAt(sqlBuilder.length() - 1)
                 .append(") VALUES(");
 
-        for(int i=0; i<=paramList.size();i++){
+        for (int i = 0; i <= paramList.size(); i++) {
             sqlBuilder.append("?");
-            if(i!= parameterMap.size()-1)
+            if (i != parameterMap.size() - 1)
                 sqlBuilder.append(",");
         }
         sqlBuilder.append(")");
@@ -51,7 +53,7 @@ public class MsSQLDAOImpl implements DAO {
             pstmt = connection.prepareStatement(sqlBuilder.toString());
             setParameter(pstmt, paramList);
             pstmt.execute();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -67,8 +69,33 @@ public class MsSQLDAOImpl implements DAO {
     }
 
     @Override
-    public Object get(String tableName, Map<String, Object> parameterMap) {
-        return null;
+    public List<Object> get(String tableName, Map<String, Object> parameterMap, RowMapper rowMapper) {
+        List<Object> result = new ArrayList<>();
+        StringBuilder sqlBuilder = new StringBuilder();
+        sqlBuilder.append("SELECT * FROM")
+                .append(tableName)
+                .append(" WHERE ");
+        int index=0;
+        for (String key : parameterMap.keySet()) {
+            sqlBuilder.append(key)
+                    .append("=")
+                    .append(parameterMap.get(key));
+            if(index!= parameterMap.size()-1)
+                sqlBuilder.append(" AND ");
+            index++;
+        }
+        try {
+            pstmt = connection.prepareStatement(sqlBuilder.toString());
+            pstmt.execute();
+            ResultSet rs = pstmt.getResultSet();
+            while (rs.next()){
+                result.add(rowMapper.mapRow(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     private void setParameter(PreparedStatement pstmt, List<Object> paramList) throws SQLException {

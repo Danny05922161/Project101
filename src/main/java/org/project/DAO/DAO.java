@@ -1,5 +1,8 @@
 package org.project.DAO;
 
+import org.project.DAO.RowMapper.RowMapper;
+
+import java.util.List;
 import java.util.Map;
 
 public interface DAO{
@@ -9,5 +12,5 @@ public interface DAO{
 
     void delete(String tableName, Map<String, Object> parameterMap);
 
-    Object get(String tableName, Map<String, Object> parameterMap);
+    List<Object> get(String tableName, Map<String, Object> parameterMap, RowMapper rowMapper);
 }

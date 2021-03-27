@@ -1,9 +1,11 @@
 package org.project.Repo;
 
 import org.project.DAO.DAO;
+import org.project.DAO.RowMapper.BookInfoRowMapper;
 import org.project.DTO.BookInfoDTO;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -41,7 +43,7 @@ public class BookInfoRepo implements Repository<BookInfoDTO> {
     }
 
     @Override
-    public BookInfoDTO findByCondition(BookInfoDTO bookInfoDTO) {
+    public List<BookInfoDTO> findByCondition(BookInfoDTO bookInfoDTO) {
         Map<String, Object> map = new HashMap();
         if (Objects.nonNull(bookInfoDTO.getAuthor()))
             map.put("author", bookInfoDTO.getAuthor());
@@ -55,7 +57,7 @@ public class BookInfoRepo implements Repository<BookInfoDTO> {
             map.put("book_counts", bookInfoDTO.getBookCounts());
 
 
-        return (BookInfoDTO) dao.get(tableName, map);
+        return (List<BookInfoDTO>)(List<?>) dao.get(tableName, map, new BookInfoRowMapper());
     }
 
     @Override

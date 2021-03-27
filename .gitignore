@@ -43,3 +43,6 @@ Project101.iml
 .idea/libraries/Maven__org_apache_commons_commons_lang3_3_11.xml
 .idea/libraries/Maven__org_apache_commons_commons_text_1_9.xml
 .idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
+.idea/sbt.xml
+.idea/uiDesigner.xml
+.idea/codeStyles/Project.xml
