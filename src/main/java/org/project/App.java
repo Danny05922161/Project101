@@ -1,10 +1,8 @@
 package org.project;
 
-import org.project.DAO.BookInfoDAO;
-import org.project.DAO.BookInfoMSSQLDAOImpl;
+import org.project.DAO.MsSQLDAOImpl;
 import org.project.DTO.BookInfoDTO;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -29,9 +27,9 @@ public class App {
         }
 
 
-        BookInfoDAO bookInfoDAO = new BookInfoMSSQLDAOImpl();
-        for (BookInfoDTO bookInfoDTO:bookInfoDTOS){
-            bookInfoDAO.save(bookInfoDTO);
-        }
+//        BookInfoDAO bookInfoDAO = new MsSQLDAOImpl();
+//        for (BookInfoDTO bookInfoDTO:bookInfoDTOS){
+//            bookInfoDAO.save(bookInfoDTO);
+//        }
     }
 }

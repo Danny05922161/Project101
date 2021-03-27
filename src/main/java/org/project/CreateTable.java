@@ -20,7 +20,7 @@ public class CreateTable {
             System.out.println("Creating table in given database...");
             stmt = conn.createStatement();
 
-            String sql = "CREATE TABLE REGISTRATION " +
+            String sql = "CREATE OR ALTER TABLE REGISTRATION " +
                     "(id INTEGER not NULL, " +
                     " bookname VARCHAR(255), " +
                     " last VARCHAR(255), " +

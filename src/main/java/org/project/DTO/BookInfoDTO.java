@@ -2,21 +2,13 @@ package org.project.DTO;
 
 
 public class BookInfoDTO {
-	private int Rank;
-	private String BookName;
-	private String Author;
-	private String Publisher; 
-	private String BookCounts;
+	private Integer rank;
+	private String bookName;
+	private String author;
+	private String publisher;
+	private String bookCounts;
 
 	public BookInfoDTO() {
-		
-	}
-	public BookInfoDTO (int Rank, String BookName, String Author, String Publisher, int BookCounts) {
-		this.Rank="排名";
-		this.BookName="書名";
-		this.Author="作者";
-		this.Publisher="出版社";
-		this.BookCounts="借閱次數";
 	}
 	
 	public int getRank() {
@@ -36,18 +28,19 @@ public class BookInfoDTO {
 	}
 
 	public String getAuthor() {
-		return Author;
+		return author;
 	}
 
 	public void setAuthor(String author) {
-		Author = author;
+		this.author = author;
 	}
 
 	public String getPublisher() {
-		return Publisher;
+		return publisher;
 	}
+
 	public void setPublisher(String publisher) {
-		Publisher = publisher;
+		this.publisher = publisher;
 	}
 
 	public String getBookCounts() {
