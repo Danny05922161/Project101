@@ -67,7 +67,6 @@ public class MySQLDAOImpl implements DAO{
 
     @Override
     public List<Object> get(String tableName, Map<String, Object> parameterMap, RowMapper rowMapper) {
-
         List<Object> result = new ArrayList<>();
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("SELECT * FROM")

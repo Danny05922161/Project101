@@ -2,6 +2,8 @@ package org.project;
 
 import org.project.DAO.MsSQLDAOImpl;
 import org.project.DTO.BookInfoDTO;
+import org.project.Factory.RepoFactory;
+import org.project.Repo.Repository;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,16 +22,17 @@ public class App {
         //Download
         try {
             DownloadCSV downloadCSV = new DownloadCSV();
-            downloadCSV.downloadFile(url);
             bookInfoDTOS = downloadCSV.streamFileToObject(url);
         }catch (IOException e){
             e.printStackTrace();
         }
 
+        Repository bookInfoDAO = new RepoFactory().getRepoInstance(
+                DatabaseLookUp.DatabaseType.SQL_SERVER,
+                DatabaseLookUp.TableName.BOOK_INFO);
 
-//        BookInfoDAO bookInfoDAO = new MsSQLDAOImpl();
-//        for (BookInfoDTO bookInfoDTO:bookInfoDTOS){
-//            bookInfoDAO.save(bookInfoDTO);
-//        }
+        for (BookInfoDTO bookInfoDTO:bookInfoDTOS){
+            bookInfoDAO.insert(bookInfoDTO);
+        }
     }
 }

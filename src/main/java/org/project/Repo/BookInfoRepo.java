@@ -56,7 +56,6 @@ public class BookInfoRepo implements Repository<BookInfoDTO> {
         if (Objects.nonNull(bookInfoDTO.getBookCounts()))
             map.put("book_counts", bookInfoDTO.getBookCounts());
 
-
         return (List<BookInfoDTO>)(List<?>) dao.get(tableName, map, new BookInfoRowMapper());
     }
 

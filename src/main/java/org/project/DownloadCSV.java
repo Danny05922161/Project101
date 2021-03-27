@@ -17,62 +17,6 @@ import java.util.List;
 
 
 public class DownloadCSV {
-    public void downloadFile(String urls) throws IOException {
-
-        String SQL指令 = "INSERT INTO [dbo].[]\r\n"
-                + "           ([排名]\r\n"
-                + "           ,[書名]\r\n"
-                + "           ,[作者]\r\n"
-                + "           ,[出版社]\r\n"
-                + "           ,[借閱次數]\r\n"
-                + "     VALUES\r\n"
-                + "           (?,?,?,?,?)";
-
-        try {
-            URL url = new URL(urls);
-            InputStream in = url.openStream();
-            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-            BufferedReader br = new BufferedReader(isr);
-
-//			ConnectionUtil connutil = new ConnectionUtil();
-
-
-            Connection conn = ConnectionUtil.getMSSQLConnection();
-
-
-            PreparedStatement pstmt = conn.prepareStatement(SQL指令);
-
-            br.readLine();
-            String line = null;
-
-            while ((line = br.readLine()) != null) {
-
-                String item[] = line.split(",");
-
-                pstmt.setInt(1, Integer.valueOf(item[0]));
-                pstmt.setString(2, item[1]);
-                pstmt.setString(3, item[2]);
-                pstmt.setString(4, item[3]);
-                pstmt.setInt(5, Integer.valueOf(item[4]));
-
-                pstmt.executeUpdate();
-
-                in.close();
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        }
-
-    }
-
-
 	public List<BookInfoDTO> streamFileToObject(String urls) throws IOException {
 		List<BookInfoDTO> bookInfoDTOList = new ArrayList<>();
 		InputStream in = null;
