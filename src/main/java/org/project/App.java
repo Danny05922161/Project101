@@ -33,16 +33,5 @@ public class App {
         for (BookInfoDTO bookInfoDTO:bookInfoDTOS){
             bookInfoDAO.save(bookInfoDTO);
         }
-
-
-
-        List<BookInfoDTO> bookInfoDTOList;
-        //Parse
-       try {
-           ConvertObject convertObject = new ConvertObject();
-//           bookInfoDTOList = convertObject.parseFileToBookInfo(filename);
-       }catch (FileNotFoundException e){
-           e.printStackTrace();
-       }
     }
 }
