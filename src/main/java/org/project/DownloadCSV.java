@@ -1,5 +1,7 @@
 package org.project;
 
+import com.opencsv.CSVReader;
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.project.DTO.BookInfoDTO;
 
 import java.io.BufferedReader;
@@ -8,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,26 +22,21 @@ import java.util.List;
 public class DownloadCSV {
 	public List<BookInfoDTO> streamFileToObject(String urls) throws IOException {
 		List<BookInfoDTO> bookInfoDTOList = new ArrayList<>();
-		InputStream in = null;
 		try {
 			URL url = new URL(urls);
-			in = url.openStream();
-			InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+			URLConnection urlConnection = url.openConnection();
+;			InputStreamReader isr = new InputStreamReader(urlConnection.getInputStream());
 			BufferedReader br = new BufferedReader(isr);
-
-			br.readLine();
-			String line = null;
-
-			while ((line = br.readLine()) != null) {
+			CSVReader csvReader = new CSVReader(br);
+			List<String[]> data = csvReader.readAll();
+			data.remove(0); //Remove header
+			for(String[] s: data){
 				BookInfoDTO bookInfoDTO = new BookInfoDTO();
-				String[] item = line.split(",");
-
-				bookInfoDTO.setRank(Integer.valueOf(item[0]));
-				bookInfoDTO.setBookName(item[1]);
-				bookInfoDTO.setAuthor(item[2]);
-				bookInfoDTO.setPublisher(item[3]);
-				bookInfoDTO.setBookCounts(item[4]);
-
+				bookInfoDTO.setRank(Integer.parseInt(s[0]));
+				bookInfoDTO.setBookName(s[1]);
+				bookInfoDTO.setAuthor(s[2]);
+				bookInfoDTO.setPublisher(s[3]);
+				bookInfoDTO.setBookCounts(Integer.parseInt(s[4]));
 				bookInfoDTOList.add(bookInfoDTO);
 			}
 		} catch (FileNotFoundException e) {
@@ -47,8 +45,6 @@ public class DownloadCSV {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			in.close();
 		}
 		return bookInfoDTOList;
 	}

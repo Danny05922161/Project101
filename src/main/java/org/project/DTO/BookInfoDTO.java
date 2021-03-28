@@ -1,21 +1,26 @@
 package org.project.DTO;
 
 
-public class BookInfoDTO {
-	private Integer rank;
-	private String bookName;
-	private String author;
-	private String publisher;
-	private String bookCounts;
+import com.opencsv.bean.CsvBindByName;
 
-	public BookInfoDTO() {
-	}
-	
-	public int getRank() {
+public class BookInfoDTO {
+
+	@CsvBindByName(column = "排名")
+	private Integer rank;
+	@CsvBindByName(column = "書名")
+	private String bookName;
+	@CsvBindByName(column = "作者")
+	private String author;
+	@CsvBindByName(column = "出版社")
+	private String publisher;
+	@CsvBindByName(column = "借閱次數")
+	private Integer bookCounts;
+
+	public Integer getRank() {
 		return rank;
 	}
 
-	public void setRank(int rank) {
+	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
 
@@ -43,11 +48,11 @@ public class BookInfoDTO {
 		this.publisher = publisher;
 	}
 
-	public String getBookCounts() {
+	public Integer getBookCounts() {
 		return bookCounts;
 	}
 
-	public void setBookCounts(String bookCounts) {
+	public void setBookCounts(Integer bookCounts) {
 		this.bookCounts = bookCounts;
 	}
 }

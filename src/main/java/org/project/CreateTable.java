@@ -8,24 +8,15 @@ public class CreateTable {
         Connection conn = null;
         Statement stmt = null;
         try {
-            //STEP 2: Register JDBC driver
-            Class.forName("com.mysql.jdbc.Driver");
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
             conn = ConnectionUtil.getMSSQLConnection();
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
             stmt = conn.createStatement();
 
-            String sql = "CREATE OR ALTER TABLE REGISTRATION " +
-                    "(id INTEGER not NULL, " +
-                    " bookname VARCHAR(255), " +
-                    " last VARCHAR(255), " +
-                    " age INTEGER, " +
-                    " PRIMARY KEY ( id ))";
+            String sql = "CREATE TABLE book_info " +
+                    "(rank NUMERIC(10,0), " +
+                    " book_name VARCHAR(100), " +
+                    " author VARCHAR(100), " +
+                    " publisher VARCHAR(100), " +
+                    " book_counts NUMERIC(10,0) )";
 
             stmt.executeUpdate(sql);
             System.out.println("Created table in given database...");

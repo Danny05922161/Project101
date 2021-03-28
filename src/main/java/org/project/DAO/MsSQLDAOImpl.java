@@ -42,7 +42,7 @@ public class MsSQLDAOImpl implements DAO {
         sqlBuilder.deleteCharAt(sqlBuilder.length() - 1)
                 .append(") VALUES(");
 
-        for (int i = 0; i <= paramList.size(); i++) {
+        for (int i = 0; i < paramList.size(); i++) {
             sqlBuilder.append("?");
             if (i != parameterMap.size() - 1)
                 sqlBuilder.append(",");

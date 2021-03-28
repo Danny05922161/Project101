@@ -14,7 +14,7 @@ public class BookInfoRowMapper implements RowMapper<BookInfoDTO>{
         bookInfoDTO.setBookName(rs.getString("book_name"));
         bookInfoDTO.setAuthor(rs.getString("author"));
         bookInfoDTO.setPublisher(rs.getString("publisher"));
-        bookInfoDTO.setBookCounts(rs.getString("book_counts"));
+        bookInfoDTO.setBookCounts(rs.getInt("book_counts"));
 
         return bookInfoDTO;
     }

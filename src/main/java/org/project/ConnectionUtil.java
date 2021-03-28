@@ -16,7 +16,7 @@ public class ConnectionUtil {
     private static Properties prop;
 
     public static Connection getMSSQLConnection() throws SQLException{
-        if(Objects.nonNull(prop)){
+        if(Objects.isNull(prop)){
             getPropertySetting();
         }
 
@@ -30,7 +30,7 @@ public class ConnectionUtil {
     }
 
     public static Connection getMySQLConnection() throws SQLException{
-        if(Objects.nonNull(prop)){
+        if(Objects.isNull(prop)){
             getPropertySetting();
         }
 
@@ -46,7 +46,7 @@ public class ConnectionUtil {
     //Read Properties
     private static void getPropertySetting(){
         prop = new Properties();
-        String propFileName = "config.properties";
+        String propFileName = "datasource.properties";
         InputStream inputStream = null;
         try {
             inputStream = ConnectionUtil.class.getClassLoader().getResourceAsStream(propFileName);
