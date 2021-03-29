@@ -15,7 +15,8 @@ public class CreateTable{
             conn = ConnectionUtil.getMSSQLConnection();
             stmt = conn.createStatement();
 
-            String sql = "CREATE TABLE book_info " +
+            String sql = "IF EXISTS (SELECT * FROM sys.tables WHERE name = 'book_info' AND type = 'U') DROP TABLE book_info;" +
+                    "CREATE TABLE book_info " +
                     "(rank NUMERIC(10,0), " +
                     " book_name VARCHAR(100), " +
                     " author VARCHAR(100), " +

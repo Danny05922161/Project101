@@ -39,7 +39,7 @@ public class MySQLDAOImpl implements DAO{
         sqlBuilder.deleteCharAt(sqlBuilder.length() - 1)
                 .append(") VALUES(");
 
-        for (int i = 0; i <= paramList.size(); i++) {
+        for (int i = 0; i < paramList.size(); i++) {
             sqlBuilder.append("?");
             if (i != parameterMap.size() - 1)
                 sqlBuilder.append(",");
@@ -69,18 +69,23 @@ public class MySQLDAOImpl implements DAO{
     public List<Object> get(String tableName, Map<String, Object> parameterMap, RowMapper rowMapper) {
         List<Object> result = new ArrayList<>();
         StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("SELECT * FROM")
-                .append(tableName)
-                .append(" WHERE ");
+        sqlBuilder.append("SELECT * FROM ")
+                .append(tableName);
         int index=0;
-        for (String key : parameterMap.keySet()) {
-            sqlBuilder.append(key)
-                    .append("=")
-                    .append(parameterMap.get(key));
-            if(index!= parameterMap.size()-1)
-                sqlBuilder.append(" AND ");
-            index++;
+
+        if(parameterMap.size()>0){
+            sqlBuilder.append(" WHERE ");
+
+            for (String key : parameterMap.keySet()) {
+                sqlBuilder.append(key)
+                        .append("=")
+                        .append(parameterMap.get(key));
+                if(index!= parameterMap.size()-1)
+                    sqlBuilder.append(" AND ");
+                index++;
+            }
         }
+
         try {
             pstmt = connection.prepareStatement(sqlBuilder.toString());
             pstmt.execute();

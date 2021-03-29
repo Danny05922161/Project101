@@ -46,7 +46,7 @@ public class BookInfoRepo implements Repository<BookInfoDTO> {
         Map<String, Object> map = new HashMap();
         if (Objects.nonNull(bookInfoDTO.getAuthor()))
             map.put("author", bookInfoDTO.getAuthor());
-        if (Objects.nonNull(bookInfoDTO.getPublisher()))
+        if (Objects.nonNull(bookInfoDTO.getRank()))
             map.put("rank", bookInfoDTO.getRank());
         if (Objects.nonNull(bookInfoDTO.getBookName()))
             map.put("book_name", bookInfoDTO.getBookName());

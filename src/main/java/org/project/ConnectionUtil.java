@@ -25,7 +25,7 @@ public class ConnectionUtil {
                 prop.getProperty("MsSQLUser"),
                 prop.getProperty("MsSQLPasswd"));
 
-        System.out.println("connection successful");
+        System.out.println("Connection to SQL server successful!");
         return conn;
     }
 
@@ -39,7 +39,7 @@ public class ConnectionUtil {
                 prop.getProperty("MySQLUser"),
                 prop.getProperty("MySQLPassword"));
 
-        System.out.println("connection successful");
+        System.out.println("Connection MySQL successful!");
         return conn;
     }
 

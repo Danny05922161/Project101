@@ -72,18 +72,23 @@ public class MsSQLDAOImpl implements DAO {
     public List<Object> get(String tableName, Map<String, Object> parameterMap, RowMapper rowMapper) {
         List<Object> result = new ArrayList<>();
         StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("SELECT * FROM")
-                .append(tableName)
-                .append(" WHERE ");
+        sqlBuilder.append("SELECT * FROM ")
+                .append(tableName);
         int index=0;
-        for (String key : parameterMap.keySet()) {
-            sqlBuilder.append(key)
-                    .append("=")
-                    .append(parameterMap.get(key));
-            if(index!= parameterMap.size()-1)
-                sqlBuilder.append(" AND ");
-            index++;
+
+        if(parameterMap.size()>0){
+            sqlBuilder.append(" WHERE ");
+
+            for (String key : parameterMap.keySet()) {
+                sqlBuilder.append(key)
+                        .append("=")
+                        .append(parameterMap.get(key));
+                if(index!= parameterMap.size()-1)
+                    sqlBuilder.append(" AND ");
+                index++;
+            }
         }
+
         try {
             pstmt = connection.prepareStatement(sqlBuilder.toString());
             pstmt.execute();

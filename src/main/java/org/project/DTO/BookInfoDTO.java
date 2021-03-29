@@ -5,16 +5,20 @@ import com.opencsv.bean.CsvBindByName;
 
 public class BookInfoDTO {
 
-	@CsvBindByName(column = "排名")
 	private Integer rank;
-	@CsvBindByName(column = "書名")
 	private String bookName;
-	@CsvBindByName(column = "作者")
 	private String author;
-	@CsvBindByName(column = "出版社")
 	private String publisher;
-	@CsvBindByName(column = "借閱次數")
 	private Integer bookCounts;
+
+	@Override
+	public String toString() {
+		return rank + "," +
+				QuoteString(bookName) + "," +
+				QuoteString(author) + "," +
+				QuoteString(publisher) + "," +
+				bookCounts + "\n";
+	}
 
 	public Integer getRank() {
 		return rank;
@@ -54,5 +58,12 @@ public class BookInfoDTO {
 
 	public void setBookCounts(Integer bookCounts) {
 		this.bookCounts = bookCounts;
+	}
+
+	private String QuoteString(String tag){
+		if(tag.contains(",")){
+			return "\""+tag+"\"";
+		}
+		return tag;
 	}
 }
