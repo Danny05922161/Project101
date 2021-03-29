@@ -30,11 +30,14 @@ public class App {
         }
 
         Repository bookInfoDAO = new RepoFactory().getRepoInstance(
+        		//這個？
                 DatabaseLookUp.DatabaseType.SQL_SERVER,
                 DatabaseLookUp.TableName.BOOK_INFO);
 
         for (BookInfoDTO bookInfoDTO:bookInfoDTOS){
-            bookInfoDAO.insert(bookInfoDTO);
+        	//DTO: Date Transfer Object is sort of value object-namely, a mere container of data with no attached behavior.
+            //DTO資料傳遞物件，帶有資料的物件;可節省presentation layer, in order to reduce the number of method calls.
+        	bookInfoDAO.insert(bookInfoDTO);
         }
     }
 }

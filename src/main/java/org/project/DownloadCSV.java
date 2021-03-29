@@ -24,12 +24,39 @@ public class DownloadCSV {
 		List<BookInfoDTO> bookInfoDTOList = new ArrayList<>();
 		try {
 			URL url = new URL(urls);
-			URLConnection urlConnection = url.openConnection();
-;			InputStreamReader isr = new InputStreamReader(urlConnection.getInputStream());
-			BufferedReader br = new BufferedReader(isr);
-			CSVReader csvReader = new CSVReader(br);
-			List<String[]> data = csvReader.readAll();
+//			URLConnection urlConnection = url.openConnection();
+//			InputStreamReader isr = new InputStreamReader(urlConnection.getInputStream());
+//
+////			BufferedReader br = new BufferedReader(isr);
+////			CSVReader csvReader = new CSVReader(br);
+			
 			data.remove(0); //Remove header
+			InputStream in = url.openStream();
+			InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+			BufferedReader br = new BufferedReader(isr);
+			
+         PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			br.readLine();
+			String line = null ;
+
+			while((line = br.readLine()) != null)
+			{
+				
+			String strReader=line;
+			strReader=strReader.replace("\",","").replace("\"", "").replace(",,", ",").replace(", ", "^");
+
+
+				String item[] = strReader.split(",");
+
+				pstmt.setString(1,  item[0] );
+				pstmt.setString(2, item[1]);
+				pstmt.setString(3, item[2]);
+				pstmt.setString(4, item[3]);
+				pstmt.setString(5, item[4]);
+				
+				pstmt.executeUpdate();
+			}
 			for(String[] s: data){
 				BookInfoDTO bookInfoDTO = new BookInfoDTO();
 				bookInfoDTO.setRank(Integer.parseInt(s[0]));

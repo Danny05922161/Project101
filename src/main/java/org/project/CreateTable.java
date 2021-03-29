@@ -1,8 +1,12 @@
 package org.project;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
-public class CreateTable {
+public class CreateTable{
 
     public static void main(String[] args) {
         Connection conn = null;
@@ -17,7 +21,7 @@ public class CreateTable {
                     " author VARCHAR(100), " +
                     " publisher VARCHAR(100), " +
                     " book_counts NUMERIC(10,0) )";
-
+            
             stmt.executeUpdate(sql);
             System.out.println("Created table in given database...");
         } catch (SQLException se) {
@@ -42,4 +46,5 @@ public class CreateTable {
         }//end try
         System.out.println("Goodbye!");
     }//end main
+
 }

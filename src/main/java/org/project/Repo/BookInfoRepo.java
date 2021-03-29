@@ -38,7 +38,6 @@ public class BookInfoRepo implements Repository<BookInfoDTO> {
         map.put("book_name", bookInfoDTO.getBookName());
         map.put("publisher", bookInfoDTO.getPublisher());
         map.put("book_counts", bookInfoDTO.getBookCounts());
-
         dao.update(tableName, map);
     }
 
