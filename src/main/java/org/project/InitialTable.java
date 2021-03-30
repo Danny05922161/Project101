@@ -1,20 +1,21 @@
 package org.project;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class CreateTable{
+public class InitialTable {
 
-    public static void main(String[] args) {
+    public static void InitialTable(String dbType) {
         Connection conn = null;
         Statement stmt = null;
         try {
-            conn = ConnectionUtil.getMSSQLConnection();
+            if(dbType.equals(DatabaseLookUp.DatabaseType.SQL_SERVER)){
+                conn = ConnectionUtil.getMSSQLConnection();
+            }else {
+                conn = ConnectionUtil.getMSSQLConnection();
+            }
             stmt = conn.createStatement();
-
             String sql = "IF EXISTS (SELECT * FROM sys.tables WHERE name = 'book_info' AND type = 'U') DROP TABLE book_info;" +
                     "CREATE TABLE book_info " +
                     "(rank NUMERIC(10,0), " +
@@ -22,30 +23,27 @@ public class CreateTable{
                     " author VARCHAR(100), " +
                     " publisher VARCHAR(100), " +
                     " book_counts NUMERIC(10,0) )";
-            
             stmt.executeUpdate(sql);
             System.out.println("Created table in given database...");
         } catch (SQLException se) {
-            //Handle errors for JDBC
+            System.out.println("Create Table Failed!");
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
+            System.out.println("Unknown error!");
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
             try {
                 if (stmt != null)
                     conn.close();
             } catch (SQLException se) {
-            }// do nothing
+            }
             try {
                 if (conn != null)
                     conn.close();
             } catch (SQLException se) {
                 se.printStackTrace();
-            }//end finally try
-        }//end try
-        System.out.println("Goodbye!");
-    }//end main
+            }
+        }
+    }
 
 }

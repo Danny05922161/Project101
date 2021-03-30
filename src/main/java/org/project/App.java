@@ -33,9 +33,11 @@ public class App {
         switch (ans) {
             case 1:
                 dbType = DatabaseLookUp.DatabaseType.MYSQL;
+                InitialTable.InitialTable(DatabaseLookUp.DatabaseType.MYSQL);
                 break;
             case 2:
                 dbType = DatabaseLookUp.DatabaseType.SQL_SERVER;
+                InitialTable.InitialTable(DatabaseLookUp.DatabaseType.SQL_SERVER);
                 break;
             default:
                 System.out.println("Invalid input! Use default db to query.");
