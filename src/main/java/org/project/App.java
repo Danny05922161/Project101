@@ -8,6 +8,7 @@ import org.project.Repo.Repository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -104,6 +105,7 @@ public class App {
             while (ans != 6) {
                 System.out.println("Which column you want to add criteria?");
                 System.out.println("1. 排名\n2. 書名\n3. 作者\n4. 出版社\n5. 借閱次數\n6. Exit and Query!");
+                String temp;
                 ans = scanner.nextInt();
                 switch (ans) {
                     case 1:
@@ -112,15 +114,18 @@ public class App {
                         break;
                     case 2:
                         System.out.println("Please input the criteria for 書名:");
-                        bookInfoDTO.setBookName(scanner.next());
+                        while((temp = scanner.nextLine()).equals(""));
+                        bookInfoDTO.setBookName(temp);
                         break;
                     case 3:
                         System.out.println("Please input the criteria for 作者:");
-                        bookInfoDTO.setAuthor(scanner.next());
+                        while((temp = scanner.nextLine()).equals(""));
+                        bookInfoDTO.setAuthor(temp);
                         break;
                     case 4:
                         System.out.println("Please input the criteria for 出版社:");
-                        bookInfoDTO.setPublisher(scanner.next());
+                        while((temp = scanner.nextLine()).equals(""));
+                        bookInfoDTO.setPublisher(temp);
                         break;
                     case 5:
                         System.out.println("Please input the criteria for 借閱次數:");
