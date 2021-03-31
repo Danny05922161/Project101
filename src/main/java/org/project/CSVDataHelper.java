@@ -1,21 +1,22 @@
 package org.project;
 
-import com.opencsv.CSVReader;
-import com.opencsv.bean.CsvToBeanBuilder;
-import org.project.DTO.BookInfoDTO;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.project.DTO.BookInfoDTO;
 
 
 public class CSVDataHelper {
@@ -64,7 +65,7 @@ public class CSVDataHelper {
 			Writer writer = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream("Book_Info.csv"), StandardCharsets.UTF_8));
 			// write header first
-			writer.write("排名,書名,作者,出版社,借閱次數");
+			writer.write("排名,書名,作者,出版社,借閱次數\n");
 			for(BookInfoDTO bookInfoDTO: queryResult){
 				writer.write(bookInfoDTO.toString());
 			}

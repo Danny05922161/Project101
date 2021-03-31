@@ -100,7 +100,7 @@ public class App {
         ans = scanner.nextInt();
 
         BookInfoDTO bookInfoDTO = new BookInfoDTO();
-        if (ans != 1) {
+        if (ans == 2) {
             while (ans != 6) {
                 System.out.println("Which column you want to add criteria?");
                 System.out.println("1. 排名\n2. 書名\n3. 作者\n4. 出版社\n5. 借閱次數\n6. Exit and Query!");
@@ -112,15 +112,15 @@ public class App {
                         break;
                     case 2:
                         System.out.println("Please input the criteria for 書名:");
-                        bookInfoDTO.setBookName(scanner.nextLine());
+                        bookInfoDTO.setBookName(scanner.next());
                         break;
                     case 3:
                         System.out.println("Please input the criteria for 作者:");
-                        bookInfoDTO.setAuthor(scanner.nextLine());
+                        bookInfoDTO.setAuthor(scanner.next());
                         break;
                     case 4:
                         System.out.println("Please input the criteria for 出版社:");
-                        bookInfoDTO.setPublisher(scanner.nextLine());
+                        bookInfoDTO.setPublisher(scanner.next());
                         break;
                     case 5:
                         System.out.println("Please input the criteria for 借閱次數:");

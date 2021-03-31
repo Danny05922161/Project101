@@ -18,6 +18,7 @@ public class RepoFactory {
         switch(daoType) {
             case DatabaseLookUp.DatabaseType.MYSQL:
                 dao = new MySQLDAOImpl();
+                break;
             case DatabaseLookUp.DatabaseType.SQL_SERVER:
                 dao = new MsSQLDAOImpl();
                 break;

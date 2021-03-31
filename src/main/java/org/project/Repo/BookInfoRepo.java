@@ -44,13 +44,13 @@ public class BookInfoRepo implements Repository<BookInfoDTO> {
     @Override
     public List<BookInfoDTO> findByCondition(BookInfoDTO bookInfoDTO) {
         Map<String, Object> map = new HashMap();
-        if (Objects.nonNull(bookInfoDTO.getAuthor()))
+        if (Objects.nonNull(bookInfoDTO.getAuthor()) && !bookInfoDTO.getAuthor().isEmpty())
             map.put("author", bookInfoDTO.getAuthor());
         if (Objects.nonNull(bookInfoDTO.getRank()))
             map.put("rank", bookInfoDTO.getRank());
-        if (Objects.nonNull(bookInfoDTO.getBookName()))
+        if (Objects.nonNull(bookInfoDTO.getBookName()) && !bookInfoDTO.getBookName().isEmpty())
             map.put("book_name", bookInfoDTO.getBookName());
-        if (Objects.nonNull(bookInfoDTO.getPublisher()))
+        if (Objects.nonNull(bookInfoDTO.getPublisher()) && !bookInfoDTO.getPublisher().isEmpty())
             map.put("publisher", bookInfoDTO.getPublisher());
         if (Objects.nonNull(bookInfoDTO.getBookCounts()))
             map.put("book_counts", bookInfoDTO.getBookCounts());
