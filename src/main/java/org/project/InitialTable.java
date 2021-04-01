@@ -17,16 +17,22 @@ public class InitialTable {
                         "FROM sys.tables " +
                         "WHERE name = 'book_info' AND type = 'U') " +
                         "DROP TABLE book_info;");
+                stringBuilder.append("CREATE TABLE book_info (" +
+                        "rank NUMERIC(10,0)," +
+                        "book_name VARCHAR(100)," +
+                        "author VARCHAR(100)," +
+                        "publisher VARCHAR(100)," +
+                        "book_counts NUMERIC(10,0))");
             }else {
                 conn = ConnectionUtil.getMSSQLConnection();
-                stringBuilder.append("DROP TABLE IF EXISTS 'book_info';");
+//                stringBuilder.append("DROP TABLE IF EXISTS `book_info`;\n");
+//                stringBuilder.append("CREATE TABLE `book_info` (\n" +
+//                        "                    `rank` NUMERIC(10,0),\n" +
+//                        "                    `book_name` VARCHAR(100),\n" +
+//                        "                    `author` VARCHAR(100),\n" +
+//                        "                    `publisher` VARCHAR(100),\n" +
+//                        "                    `book_counts` NUMERIC(10,0))");
             }
-            stringBuilder.append("CREATE TABLE book_info (" +
-                    "rank NUMERIC(10,0)," +
-                    "book_name VARCHAR(100)," +
-                    "author VARCHAR(100)," +
-                    "publisher VARCHAR(100)," +
-                    "book_counts NUMERIC(10,0))");
 
             stmt = conn.createStatement();
             stmt.executeUpdate(stringBuilder.toString());

@@ -29,11 +29,11 @@ public class MySQLDAOImpl implements DAO{
         List<Object> paramList = new ArrayList<>();
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("INSERT INTO ")
-                .append(tableName)
+                .append(QuateString(tableName))
                 .append("(");
 
         for (String key : parameterMap.keySet()) {
-            sqlBuilder.append(key).append(",");
+            sqlBuilder.append(QuateString(key)).append(",");
             paramList.add(parameterMap.get(key));
         }
         sqlBuilder.deleteCharAt(sqlBuilder.length() - 1)
@@ -70,16 +70,21 @@ public class MySQLDAOImpl implements DAO{
         List<Object> result = new ArrayList<>();
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("SELECT * FROM ")
-                .append(tableName);
+                .append(QuateString(tableName));
         int index=0;
 
         if(parameterMap.size()>0){
             sqlBuilder.append(" WHERE ");
 
             for (String key : parameterMap.keySet()) {
-                sqlBuilder.append(key)
-                        .append("=")
-                        .append(parameterMap.get(key));
+                sqlBuilder.append(QuateString(key)).append("=");
+                if(parameterMap.get(key) instanceof String){
+                    sqlBuilder.append("'")
+                            .append(parameterMap.get(key))
+                            .append("'");
+                }else {
+                    sqlBuilder.append(parameterMap.get(key));
+                }
                 if(index!= parameterMap.size()-1)
                     sqlBuilder.append(" AND ");
                 index++;
@@ -116,5 +121,9 @@ public class MySQLDAOImpl implements DAO{
             }
             index++;
         }
+    }
+
+    private String QuateString(String target){
+        return "`"+target+"`";
     }
 }

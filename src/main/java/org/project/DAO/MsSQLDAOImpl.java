@@ -82,10 +82,13 @@ public class MsSQLDAOImpl implements DAO {
             for (String key : parameterMap.keySet()) {
                 sqlBuilder.append(key)
                         .append("=");
-                if(parameterMap.get(key) instanceof String)
-                        sqlBuilder.append("'")
-                                .append(parameterMap.get(key))
-                                .append("'");
+                if(parameterMap.get(key) instanceof String){
+                    sqlBuilder.append("'")
+                            .append(parameterMap.get(key))
+                            .append("'");
+                }else {
+                    sqlBuilder.append(parameterMap.get(key));
+                }
                 if(index!= parameterMap.size()-1)
                     sqlBuilder.append(" AND ");
                 index++;
